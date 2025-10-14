@@ -1,0 +1,27 @@
+name: "cs2 Action"
+description: "Runs and checks if your code is compliant to Epitech's Coding Style"
+runs:
+  using: "composite"
+  steps:
+    - name: "Add Epitech PPA"
+      shell: "bash"
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository -y -s ppa:epitech/ppa
+        sudo apt-get update
+
+    - name: "Install dependencies"
+      shell: "bash"
+      run: sudo apt-get install -y clang-20 epiclang banana-coding-style-checker
+
+    - name: "Install latest cs2"
+      shell: "bash"
+      run: |
+        gh release download -p "cs2-linux-x86_64" -R hugoarnal/cs2
+        sudo chmod +x ./cs2-linux-x86_64
+        sudo mv ./cs2-linux-x86_64 /usr/bin/cs2
+
+    - name: "Run cs2"
+      shell: "bash"
+      run: cs2

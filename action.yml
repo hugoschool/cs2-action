@@ -5,6 +5,9 @@ inputs:
     description: "Only install cs2, don't run it"
     required: false
     default: "false"
+  path:
+    description: "Run cs2 in this directory (relative path, will cd into it)"
+    required: false
 runs:
   using: "composite"
   steps:
@@ -30,4 +33,8 @@ runs:
     - name: "Run cs2"
       if: "${{ inputs.install_only == 'false' }}"
       shell: "bash"
-      run: cs2
+      run: |
+        if [ -n "${{ inputs.path }}" ]; then
+          cd ${{ inputs.path }}
+        fi
+        cs2

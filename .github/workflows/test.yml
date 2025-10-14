@@ -10,3 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./
+        with:
+          install_only: true
+      - name: Independant cs2 run
+        run: cs2

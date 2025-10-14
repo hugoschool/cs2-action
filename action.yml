@@ -1,5 +1,10 @@
 name: "cs2 Action"
 description: "Runs and checks if your code is compliant to Epitech's Coding Style"
+inputs:
+  install_only:
+    description: "Only install cs2, don't run it"
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -23,5 +28,6 @@ runs:
         sudo mv ./cs2-linux-x86_64 /usr/bin/cs2
 
     - name: "Run cs2"
+      if: "${{ inputs.install_only == 'false' }}"
       shell: "bash"
       run: cs2

@@ -12,5 +12,5 @@ jobs:
       - uses: ./
         with:
           path: tests/
-      - name: Independant cs2 run
-        run: cs2
+          compile_source: true
+          ref: dev

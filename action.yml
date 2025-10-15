@@ -63,4 +63,5 @@ runs:
         if [ -n "${{ inputs.path }}" ]; then
           cd ${{ inputs.path }}
         fi
-        cs2
+
+        cs2 --ci=github

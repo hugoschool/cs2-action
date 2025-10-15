@@ -1,0 +1,67 @@
+name: "cs2 Action"
+description: "Runs and checks if your code is compliant to Epitech's Coding Style"
+
+inputs:
+  install_only:
+    description: "Only install cs2, don't run it"
+    required: false
+    default: "false"
+  compile_source:
+    description: "Compile cs2 from source"
+    required: false
+  ref:
+    description: "Only works with `compile_source` input, specify which ref (commit, branch, tag) to compile from"
+    required: false
+    default: "main"
+  path:
+    description: "Run cs2 in this directory (relative path, will cd into it)"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Add Epitech PPA"
+      shell: "bash"
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository -y -s ppa:epitech/ppa
+        sudo apt-get update
+
+    - name: "Install dependencies"
+      shell: "bash"
+      run: sudo apt-get install -y clang-20 epiclang banana-coding-style-checker
+
+    - name: "Install latest cs2 (via Release)"
+      if: "${{ inputs.compile_source == '' }}"
+      shell: "bash"
+      run: |
+        gh release download -p "cs2-linux-x86_64" -R hugoarnal/cs2
+        sudo chmod +x ./cs2-linux-x86_64
+        sudo mv ./cs2-linux-x86_64 /usr/bin/cs2
+
+    - name: "Checkout cs2 source"
+      if: "${{ inputs.compile_source != '' }}"
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      with:
+        repository: hugoarnal/cs2
+        path: ${{ github.workspace }}/cs2
+        ref: ${{ inputs.ref }}
+
+    - name: "Install latest cs2 (from source)"
+      if: "${{ inputs.compile_source != '' }}"
+      shell: "bash"
+      run: |
+        cd ${{ github.workspace }}/cs2
+        cargo build --release
+        sudo cp ./target/release/cs2 /usr/bin/cs2
+
+    - name: "Run cs2"
+      if: "${{ inputs.install_only == 'false' }}"
+      shell: "bash"
+      run: |
+        if [ -n "${{ inputs.path }}" ]; then
+          cd ${{ inputs.path }}
+        fi
+
+        cs2 --ci=github

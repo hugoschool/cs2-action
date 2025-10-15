@@ -55,6 +55,7 @@ runs:
         cd ${{ github.workspace }}/cs2
         cargo build --release
         sudo cp ./target/release/cs2 /usr/bin/cs2
+        rm -rf ${{ github.workspace }}/cs2
 
     - name: "Run cs2"
       if: "${{ inputs.install_only == 'false' }}"

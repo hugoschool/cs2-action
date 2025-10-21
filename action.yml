@@ -53,8 +53,9 @@ runs:
       shell: "bash"
       run: |
         cd ${{ github.workspace }}/cs2
-        cargo build --release
-        sudo cp ./target/release/cs2 /usr/bin/cs2
+        export PREFIX=/usr
+        make release
+        sudo make install
         rm -rf ${{ github.workspace }}/cs2
 
     - name: "Run cs2"

@@ -38,7 +38,7 @@ runs:
       run: |
         gh release download -p "cs2-linux-x86_64" -R hugoarnal/cs2
         sudo chmod +x ./cs2-linux-x86_64
-        sudo mv ./cs2-linux-x86_64 /usr/bin/cs2
+        sudo mv ./cs2-linux-x86_64 /usr/local/bin/cs2
 
     - name: "Checkout cs2 source"
       if: "${{ inputs.compile_source != '' }}"
@@ -53,7 +53,6 @@ runs:
       shell: "bash"
       run: |
         cd ${{ github.workspace }}/cs2
-        export PREFIX=/usr
         make release
         sudo make install
         rm -rf ${{ github.workspace }}/cs2

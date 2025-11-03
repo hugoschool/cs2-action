@@ -1,0 +1,16 @@
+name: Check Coding Style
+on:
+    push:
+
+env:
+    GH_TOKEN: ${{ github.token }}
+
+jobs:
+  check-coding-style:
+    name: Check Coding Style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./    # Replace this with hugoschool/cs2-action@v1
+        with:
+          path: tests/valid

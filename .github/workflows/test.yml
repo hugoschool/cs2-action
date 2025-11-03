@@ -25,11 +25,11 @@ jobs:
   invalid-coding-style:
     name: Invalid Coding Style
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - id: cs2
         uses: ./
+        continue-on-error: true
         with:
           path: tests/invalid
           compile_source: true

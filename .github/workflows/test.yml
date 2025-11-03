@@ -1,0 +1,43 @@
+name: Action Testing
+on:
+  push:
+    paths:
+      - "tests/**"
+      - "action.yml"
+  workflow_dispatch:
+
+env:
+    GH_TOKEN: ${{ github.token }}
+
+jobs:
+  valid-coding-style:
+    name: Valid Coding Style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - id: cs2
+        uses: ./
+        with:
+          path: tests/valid
+          compile_source: true
+          ref: dev
+
+  invalid-coding-style:
+    name: Invalid Coding Style
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - id: cs2
+        uses: ./
+        with:
+          path: tests/invalid
+          compile_source: true
+          ref: dev
+      - id: check-failure
+        shell: bash
+        run: |
+          if ${{ ! steps.cs2.conclusion == 'failure' }}; then
+            exit 1
+          fi
+    

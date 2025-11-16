@@ -7,11 +7,8 @@ Runs and checks if your code is compliant to Epitech's Coding Style
 A typical GitHub workflow would work like that:
 
 ```yaml
-on: [push]
-
-# Keep the GH_TOKEN env or GitHub won't be able to download cs2
-env:
-    GH_TOKEN: ${{ github.token }}
+on:
+  push:
 
 jobs:
   check-coding-style:

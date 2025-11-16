@@ -36,7 +36,8 @@ runs:
       if: "${{ inputs.compile_source == '' }}"
       shell: "bash"
       run: |
-        gh release download -p "cs2-linux-x86_64" -R hugoarnal/cs2
+        TAG_NAME=$(curl -s https://api.github.com/repos/hugoarnal/cs2/releases/latest | jq -r '.tag_name')
+        wget https://github.com/hugoarnal/cs2/releases/download/$TAG_NAME/cs2-linux-x86_64
         sudo chmod +x ./cs2-linux-x86_64
         sudo mv ./cs2-linux-x86_64 /usr/local/bin/cs2
 

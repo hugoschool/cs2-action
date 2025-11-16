@@ -6,9 +6,6 @@ on:
       - "action.yml"
   workflow_dispatch:
 
-env:
-    GH_TOKEN: ${{ github.token }}
-
 jobs:
   valid-coding-style:
     name: Valid Coding Style
@@ -40,4 +37,4 @@ jobs:
           if ${{ ! steps.cs2.conclusion == 'failure' }}; then
             exit 1
           fi
-    
+

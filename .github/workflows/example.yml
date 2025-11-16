@@ -1,9 +1,7 @@
 name: Check Coding Style
 on:
   push:
-
-env:
-  GH_TOKEN: ${{ github.token }}
+  workflow_dispatch:
 
 jobs:
   check-coding-style:

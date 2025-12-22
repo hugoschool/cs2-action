@@ -16,6 +16,10 @@ inputs:
   path:
     description: "Run cs2 in this directory (relative path, will cd into it)"
     required: false
+  options:
+    description: "Run cs2 with these options (example: `-j2`)"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -66,4 +70,4 @@ runs:
           cd ${{ inputs.path }}
         fi
 
-        cs2 --ci=github
+        cs2 --ci=github ${{ inputs.options }}

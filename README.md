@@ -27,6 +27,7 @@ This runs `cs2` at the root of your repo and reports all the Coding Style errors
 - `compile_source`: Compile cs2 from source instead of downloading latest release
 - `ref`: Only works with `compile_source` input, specify which ref (commit, branch, tag) to compile from
 - `path`: Run cs2 in this directory
+- `options`: Run cs2 with these options (example: `-j2`)
 
 Checkout `action.yml` for more information.
 

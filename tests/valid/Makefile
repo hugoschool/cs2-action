@@ -4,7 +4,7 @@ hello:	valid.o
 	$(CC) -o hello valid.o
 
 clean:
-	$(RM) hello.o
+	$(RM) valid.o
 
 fclean:	clean
 	$(RM) hello

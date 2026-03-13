@@ -4,6 +4,7 @@ on:
     paths:
       - "tests/**"
       - "action.yml"
+      - ".github/workflows/*.yml"
   workflow_dispatch:
 
 jobs:

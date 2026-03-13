@@ -24,17 +24,26 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Add Epitech PPA"
+    - name: "Cache clang-20"
+      uses: awalsh128/cache-apt-pkgs-action@acb598e5ddbc6f68a970c5da0688d2f3a9f04d05 # v1.6.0
+      with:
+        packages: clang-20
+        version: 1.0
+        execute_install_scripts: true
+
+    - name: "Add Epitech PPA" # https://github.com/awalsh128/cache-apt-pkgs-action/issues/188
       shell: "bash"
       run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common
         sudo add-apt-repository -y -s ppa:epitech/ppa
         sudo apt-get update
 
-    - name: "Install dependencies"
-      shell: "bash"
-      run: sudo apt-get install -y clang-20 epiclang banana-coding-style-checker
+    - name: "Cache from Epitech PPA"
+      uses: awalsh128/cache-apt-pkgs-action@acb598e5ddbc6f68a970c5da0688d2f3a9f04d05 # v1.6.0
+      with:
+        packages: epiclang banana-coding-style-checker
+        add-repository: ppa:epitech/ppa
+        version: 1.0
+        execute_install_scripts: true
 
     - name: "Cache cs2"
       if: "${{ inputs.compile_source == '' }}"

@@ -4,11 +4,15 @@ on:
     paths:
       - "tests/**"
       - "action.yml"
+      - ".github/workflows/*.yml"
   workflow_dispatch:
 
 jobs:
   valid-coding-style:
-    name: Valid Coding Style
+    strategy:
+      matrix:
+        compile_source: ["", true]
+    name: "Valid Coding Style ${{ matrix.compile_source != '' && '(Compiling from source)' || '' }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -16,11 +20,14 @@ jobs:
         uses: ./
         with:
           path: tests/valid
-          compile_source: true
+          compile_source: ${{ matrix.compile_source }}
           ref: dev
 
   invalid-coding-style:
-    name: Invalid Coding Style
+    strategy:
+      matrix:
+        compile_source: ["", true]
+    name: "Invalid Coding Style ${{ matrix.compile_source != '' && '(Compiling from source)' || '' }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -29,7 +36,7 @@ jobs:
         continue-on-error: true
         with:
           path: tests/invalid
-          compile_source: true
+          compile_source: ${{ matrix.compile_source }}
           ref: dev
       - id: check-failure
         shell: bash

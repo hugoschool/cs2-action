@@ -36,14 +36,27 @@ runs:
       shell: "bash"
       run: sudo apt-get install -y clang-20 epiclang banana-coding-style-checker
 
-    - name: "Install latest cs2 (via Release)"
+    - name: "Cache cs2"
       if: "${{ inputs.compile_source == '' }}"
+      id: cs2-cache
+      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      with:
+        path: cs2-linux-x86_64
+        key: cs2-linux-x86_64
+
+    - name: "Download latest cs2 (via Release)"
+      if: "${{ inputs.compile_source == '' && steps.cs2-cache.outputs.cache-hit != 'true' }}"
       shell: "bash"
       run: |
         TAG_NAME=$(curl -s https://api.github.com/repos/hugoarnal/cs2/releases/latest | jq -r '.tag_name')
         wget https://github.com/hugoarnal/cs2/releases/download/$TAG_NAME/cs2-linux-x86_64
+
+    - name: "Copy the cs2 binary"
+      if: "${{ inputs.compile_source == '' }}"
+      shell: "bash"
+      run: |
         sudo chmod +x ./cs2-linux-x86_64
-        sudo mv ./cs2-linux-x86_64 /usr/local/bin/cs2
+        sudo cp ./cs2-linux-x86_64 /usr/local/bin/cs2
 
     - name: "Checkout cs2 source"
       if: "${{ inputs.compile_source != '' }}"

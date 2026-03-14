@@ -45,3 +45,13 @@ jobs:
             exit 1
           fi
 
+  test-real-project:
+    name: "Testing on a real project (my_ftp)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: hugoschool/my_ftp
+
+      - id: cs2
+        uses: hugoschool/cs2-action@main

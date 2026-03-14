@@ -41,7 +41,7 @@ runs:
       id: cs2-cache
       uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
       with:
-        path: cs2-linux-x86_64
+        path: /tmp/cs2-linux-x86_64
         key: cs2-linux-x86_64
 
     - name: "Download latest cs2 (via Release)"
@@ -50,13 +50,14 @@ runs:
       run: |
         TAG_NAME=$(curl -s https://api.github.com/repos/hugoarnal/cs2/releases/latest | jq -r '.tag_name')
         wget https://github.com/hugoarnal/cs2/releases/download/$TAG_NAME/cs2-linux-x86_64
+        sudo mv ./cs2-linux-x86_64 /tmp/cs2-linux-x86_64
 
     - name: "Copy the cs2 binary"
       if: "${{ inputs.compile_source == '' }}"
       shell: "bash"
       run: |
-        sudo chmod +x ./cs2-linux-x86_64
-        sudo cp ./cs2-linux-x86_64 /usr/local/bin/cs2
+        sudo chmod +x /tmp/cs2-linux-x86_64
+        sudo cp /tmp/cs2-linux-x86_64 /usr/local/bin/cs2
 
     - name: "Checkout cs2 source"
       if: "${{ inputs.compile_source != '' }}"

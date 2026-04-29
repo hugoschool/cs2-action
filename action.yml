@@ -39,7 +39,7 @@ runs:
     - name: "Cache cs2"
       if: "${{ inputs.compile_source == '' }}"
       id: cs2-cache
-      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /tmp/cs2-linux-x86_64
         key: cs2-linux-x86_64

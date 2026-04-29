@@ -10,7 +10,7 @@ jobs:
     name: Check Coding Style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./    # Replace this with hugoschool/cs2-action@v1
         with:
           path: tests/valid

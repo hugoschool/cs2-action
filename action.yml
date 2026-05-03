@@ -53,7 +53,12 @@ runs:
       if: "${{ inputs.compile_source == '' && steps.cs2-cache.outputs.cache-hit != 'true' }}"
       shell: "bash"
       run: |
-        TAG_NAME=$(curl -s https://api.github.com/repos/hugoarnal/cs2/releases/latest | jq -r '.tag_name')
+        TAG_NAME=$(
+          curl -s https://api.github.com/repos/hugoarnal/cs2/releases/latest |
+          grep -E -i "\"tag_name\": \"(.*)\",$" |
+          sed -e 's/^\s*//' -e '/^$/d' | # Remove trailing spaces / tabs from the line
+          cut -d "\"" -f 4
+        )
         wget https://github.com/hugoarnal/cs2/releases/download/$TAG_NAME/cs2-linux-x86_64
         sudo mv ./cs2-linux-x86_64 /tmp/cs2-linux-x86_64
 

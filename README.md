@@ -28,6 +28,7 @@ This runs `cs2` at the root of your repo and reports all the Coding Style errors
 
 - `install_only`: Doesn't run cs2, only installs it for you
 - `compile_source`: Compile cs2 from source instead of downloading latest release
+- `install_dependencies`: Install required dependencies for cs2 to run
 - `ref`: Only works with `compile_source` input, specify which ref (commit, branch, tag) to compile from
 - `path`: Run cs2 in this directory
 - `options`: Run cs2 with these options (example: `-j2`)

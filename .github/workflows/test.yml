@@ -23,6 +23,19 @@ jobs:
           compile_source: ${{ matrix.compile_source }}
           ref: dev
 
+  valid-coding-style-using-epitest-docker:
+    name: "Valid Coding Style (epitest-docker)"
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v6
+      - id: cs2
+        uses: ./
+        with:
+          path: tests/valid
+          install_dependencies: false
+
   invalid-coding-style:
     strategy:
       matrix:

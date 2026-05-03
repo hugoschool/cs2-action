@@ -9,6 +9,9 @@ inputs:
   compile_source:
     description: "Compile cs2 from source"
     required: false
+  install_dependencies:
+    description: "Install required dependencies for cs2 to run"
+    required: false
   ref:
     description: "Only works with `compile_source` input, specify which ref (commit, branch, tag) to compile from"
     required: false
@@ -25,6 +28,7 @@ runs:
   using: "composite"
   steps:
     - name: "Add Epitech PPA"
+      if: "${{ inputs.install_dependencies == '' }}"
       shell: "bash"
       run: |
         sudo apt-get update
@@ -33,6 +37,7 @@ runs:
         sudo apt-get update
 
     - name: "Install dependencies"
+      if: "${{ inputs.install_dependencies == '' }}"
       shell: "bash"
       run: sudo apt-get install -y clang-20 epiclang banana-coding-style-checker
 

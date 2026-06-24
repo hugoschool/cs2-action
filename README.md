@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Check Coding Style
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: hugoschool/cs2-action@v1
 ```
 
@@ -39,7 +39,7 @@ Using options is done with the `with` keyword:
 ```yaml
 # ...
 steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: hugoschool/cs2-action@v1
       with:
         path: tests/

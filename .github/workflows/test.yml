@@ -15,7 +15,7 @@ jobs:
     name: "Valid Coding Style ${{ matrix.compile_source != '' && '(Compiling from source)' || '' }}"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - id: cs2
         uses: ./
         with:
@@ -30,7 +30,7 @@ jobs:
     name: "Invalid Coding Style ${{ matrix.compile_source != '' && '(Compiling from source)' || '' }}"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - id: cs2
         uses: ./
         continue-on-error: true
@@ -49,7 +49,7 @@ jobs:
     name: "Testing on a real project (my_ftp)"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: hugoschool/my_ftp
 

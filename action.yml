@@ -66,6 +66,7 @@ runs:
         repository: hugoarnal/cs2
         path: ${{ github.workspace }}/cs2
         ref: ${{ inputs.ref }}
+        persist-credentials: false
 
     - name: "Install latest cs2 (from source)"
       if: "${{ inputs.compile_source != '' }}"
@@ -80,8 +81,11 @@ runs:
       if: "${{ inputs.install_only == 'false' }}"
       shell: "bash"
       run: |
-        if [ -n "${{ inputs.path }}" ]; then
-          cd ${{ inputs.path }}
+        if [ -n "${INPUTS_PATH}" ]; then
+          cd ${INPUTS_PATH}
         fi
 
-        cs2 --ci=github ${{ inputs.options }}
+        cs2 --ci=github ${INPUTS_OPTIONS}
+      env:
+        INPUTS_PATH: ${{ inputs.path }}
+        INPUTS_OPTIONS: ${{ inputs.options }}

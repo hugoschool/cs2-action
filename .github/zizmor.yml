@@ -1,0 +1,15 @@
+rules:
+  unpinned-uses:
+    ignore:
+      - example.yml
+      - test.yml
+  excessive-permissions:
+    ignore:
+      - example.yml
+      - test.yml
+  artipacked:
+    ignore:
+      - example.yml
+      - test.yml
+  dependabot-cooldown:
+    disable: true

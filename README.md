@@ -3,7 +3,9 @@
 Runs and checks if your code is compliant to Epitech's Coding Style
 
 > [!NOTE]
-> If you're an Epitech student and you wish to use this extension, I highly recommand creating a repository on your personal account that mirrors to the Epitech repo.
+> If you're an Epitech student and you wish to use this action, I highly recommand creating a repository on your personal account that mirrors to the Epitech repo.
+>
+> Epitech's repos can make it hard to use external actions. Using your own repos allow total control over your CI.
 
 ## Usage
 

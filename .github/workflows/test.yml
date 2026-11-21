@@ -13,7 +13,7 @@ jobs:
       matrix:
         compile_source: ["", true]
     name: "Valid Coding Style ${{ matrix.compile_source != '' && '(Compiling from source)' || '' }}"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
       - id: cs2
@@ -28,7 +28,7 @@ jobs:
       matrix:
         compile_source: ["", true]
     name: "Invalid Coding Style ${{ matrix.compile_source != '' && '(Compiling from source)' || '' }}"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
       - id: cs2
@@ -47,7 +47,7 @@ jobs:
 
   test-real-project:
     name: "Testing on a real project (my_ftp)"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
         with:

@@ -8,7 +8,7 @@ on:
 jobs:
   check-coding-style:
     name: Check Coding Style
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
       - uses: ./    # Replace this with hugoschool/cs2-action@v1

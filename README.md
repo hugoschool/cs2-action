@@ -17,7 +17,7 @@ on:
 
 jobs:
   check-coding-style:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     name: Check Coding Style
     steps:
       - uses: actions/checkout@v7

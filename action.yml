@@ -24,17 +24,16 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Add Epitech PPA"
-      shell: "bash"
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository -y -s ppa:epitech/ppa
-        sudo apt-get update
+    # See issue #14
+    # - name: "Add Epitech PPA"
+    #   shell: "bash"
+    #   run: |
+    #     sudo add-apt-repository -y ppa:epitech/ppa
+    #     sudo apt-get update
 
     - name: "Install dependencies"
       shell: "bash"
-      run: sudo apt-get install -y clang-20 epiclang banana-coding-style-checker
+      run: sudo apt-get install -y clang-21
 
     - name: "Cache cs2"
       if: "${{ inputs.compile_source == '' }}"
@@ -76,6 +75,12 @@ runs:
         make release
         sudo make install
         rm -rf ${{ github.workspace }}/cs2
+
+    - name: "Install epiclang-bin & banana-bin"
+      shell: "bash"
+      run: |
+        cs2 install --package=epiclang-bin
+        cs2 install --package=banana-bin
 
     - name: "Run cs2"
       if: "${{ inputs.install_only == 'false' }}"

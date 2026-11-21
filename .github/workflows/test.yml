@@ -53,5 +53,9 @@ jobs:
         with:
           repository: hugoschool/my_ftp
 
+      - uses: actions/checkout@v7
+        with:
+          path: cs2-action
+
       - id: cs2
-        uses: hugoschool/cs2-action@main
+        uses: ./cs2-action/.
